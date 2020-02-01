@@ -66,9 +66,9 @@ export class InboxList extends React.Component {
                 <br />
                 {task.description}
                 <br />
-                {task.id}
+                Task id: {task.id}
                 <br />
-                {task.createdOn}
+                Create: {task.createdOn}
               </li>
             ))}
           </ul>

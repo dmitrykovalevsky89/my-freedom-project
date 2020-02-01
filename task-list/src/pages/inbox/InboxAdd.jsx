@@ -11,7 +11,23 @@ export class InboxAdd extends React.Component {
     isFocusedOn: false
   };
 
-  dateCreate = () => Date.now().toString();
+  dateCreate = () => {
+    const date = new Date();
+    var options = {
+      era: "short",
+      year: "numeric",
+      month: "long",
+      day: "numeric",
+      weekday: "long",
+      timezone: "UTC",
+      hour: "numeric",
+      minute: "numeric",
+      second: "numeric"
+    };
+    const fullDate = date.toLocaleString("ru", options);
+
+    return date.toString();
+  };
 
   render() {
     return (
@@ -28,15 +44,16 @@ export class InboxAdd extends React.Component {
         />
         <br />
         <span>Description: </span>
-        <input
-          type="text"
+        <textarea
           value={this.state.description}
           onChange={e =>
             this.setState({
               description: e.target.value
             })
           }
-        />
+        >
+          {this.state.description}
+        </textarea>
         <br />
         <button
           onClick={() => {
