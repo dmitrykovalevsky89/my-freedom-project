@@ -1,6 +1,5 @@
 import React from "react";
-// import logo from './logo.svg';
-// import './App.css';
+import { Provider } from "react-redux";
 import {
   BrowserRouter,
   Route,
@@ -9,28 +8,37 @@ import {
   Switch
 } from "react-router-dom";
 import MainPage from "./pages/main/MainPage";
-import { InboxList } from "./pages/inbox/InboxList";
+// import { InboxList } from "./pages/inbox/InboxList";
+import { ConnectedInboxPage } from "./pages/inbox";
+
 import { TasksContainer } from "./pages/tasks/TasksContainer";
 
 const MenuLink = props => (
   <NavLink {...props} activeStyle={{ backgroundColor: "gray" }} />
 );
 
-const App = () => (
-  <BrowserRouter>
-    <div style={{ display: "flex", justifyContent: "space-around" }}>
-      <MenuLink to="/">Main page</MenuLink>
-      <MenuLink to="/inbox">Inbox</MenuLink>
-      <MenuLink to="/tasks">Task List</MenuLink>
-    </div>
+const App = ({ store }) => (
+  <Provider store={store}>
+    <BrowserRouter>
+      <div style={{ display: "flex", justifyContent: "space-around" }}>
+        <MenuLink to="/inbox">Inbox</MenuLink>
+        <MenuLink to="/tasks">Task List</MenuLink>
+      </div>
 
-    <Switch>
-      <Route path="/inbox" render={() => <InboxList />} />
-      <Route path="/tasks" render={() => <TasksContainer />} />
-      <Route path="/" render={() => <MainPage />} />
-      <Route>Not found</Route>
-    </Switch>
-  </BrowserRouter>
+      <Switch>
+        <Route path="/" exact>
+          <MainPage />
+        </Route>
+        <Route path="/inbox">
+          <ConnectedInboxPage />
+        </Route>
+        <Route path="/tasks">
+          <TasksContainer />
+        </Route>
+        <Route>Page was not found</Route>
+      </Switch>
+    </BrowserRouter>
+  </Provider>
 );
 
 export default App;

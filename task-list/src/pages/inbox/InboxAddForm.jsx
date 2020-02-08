@@ -1,6 +1,9 @@
 import React from "react";
+import { bindActionCreators } from "redux";
+import { connect } from "react-redux";
+import { addTask } from "./reducer";
 
-export class InboxAdd extends React.Component {
+export class InboxAddForm extends React.Component {
   state = {
     title: "",
     description: "",
@@ -31,7 +34,12 @@ export class InboxAdd extends React.Component {
 
   render() {
     return (
-      <form onSubmit={e => e.preventDefault()}>
+      <form
+        onSubmit={e => {
+          e.preventDefault();
+          this.props.onSave(this.state);
+        }}
+      >
         <span>Name Task: </span>
         <input
           type="text"
@@ -56,26 +64,32 @@ export class InboxAdd extends React.Component {
         </textarea>
         <br />
         <button
-          onClick={() => {
-            if (
-              this.state.title &&
-              this.state.title.trim() &&
-              this.state.description &&
-              this.state.description.trim()
-            ) {
-              this.props.onSave(
-                this.state.title,
-                this.state.description,
-                this.dateCreate()
-              );
-              this.setState({ name: "", phone: "", createdOn: "null" });
-            }
-          }}
+          type="submit"
+          // onClick={() => {
+          //   if (
+          //     this.state.title &&
+          //     this.state.title.trim() &&
+          //     this.state.description &&
+          //     this.state.description.trim()
+          //   ) {
+          //     this.props.onSave(
+          //       this.state.title,
+          //       this.state.description,
+          //       this.dateCreate()
+          //     );
+          //     this.setState({ name: "", phone: "", createdOn: "null" });
+          //   }
+          // }}
         >
           Add
         </button>
-        <button onClick={() => this.props.onCancel()}>Cancel</button>
+        {/*<button onClick={() => this.props.onCancel()}>Cancel</button>*/}
       </form>
     );
   }
 }
+
+export const ConnectedInboxAddForm = connect(
+  state => ({}),
+  dispatch => bindActionCreators({ onSave: addTask }, dispatch)
+)(InboxAddForm);
