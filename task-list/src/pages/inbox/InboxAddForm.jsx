@@ -38,6 +38,7 @@ export class InboxAddForm extends React.Component {
         onSubmit={e => {
           e.preventDefault();
           this.props.onSave(this.state);
+          this.setState({ title: "", description: "", createdOn: "null" });
         }}
       >
         <span>Name Task: </span>
@@ -63,26 +64,7 @@ export class InboxAddForm extends React.Component {
           {this.state.description}
         </textarea>
         <br />
-        <button
-          type="submit"
-          // onClick={() => {
-          //   if (
-          //     this.state.title &&
-          //     this.state.title.trim() &&
-          //     this.state.description &&
-          //     this.state.description.trim()
-          //   ) {
-          //     this.props.onSave(
-          //       this.state.title,
-          //       this.state.description,
-          //       this.dateCreate()
-          //     );
-          //     this.setState({ name: "", phone: "", createdOn: "null" });
-          //   }
-          // }}
-        >
-          Add
-        </button>
+        <button type="submit">Add</button>
         {/*<button onClick={() => this.props.onCancel()}>Cancel</button>*/}
       </form>
     );

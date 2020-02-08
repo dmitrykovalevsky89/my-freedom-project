@@ -1,4 +1,6 @@
-const INBOX_URL = `https://jsonplaceholder.typicode.com/users`;
+const INBOX_URL = `https://jsonbox.io/box_649ae0faa930c4682445`;
+// `https://jsonplaceholder.typicode.com/users`
+// change url to jsonbox.io - подготовить список задач в этот box
 
 export class InboxService {
   async _makeRequest(url, method = "GET", body) {

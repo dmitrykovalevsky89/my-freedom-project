@@ -85,19 +85,19 @@ import { NavLink } from "react-router-dom";
 
 export class InboxList extends React.Component {
   state = {
-    inboxTasks: [
-      {
-        id: "ads46rgvdu5",
-        title: "Получить диплом",
-        description: "Отучившись в университете, получу диплом",
-        createdOn: "2020, 25 января, 21:47",
-        userId: 1,
-        projectId: null,
-        isDone: false,
-        isFocusedOn: false
-      }
-    ],
-    shouldShowForm: null
+    // inboxTasks: [
+    //   {
+    //     id: "ads46rgvdu5",
+    //     title: "Получить диплом",
+    //     description: "Отучившись в университете, получу диплом",
+    //     createdOn: "2020, 25 января, 21:47",
+    //     userId: 1,
+    //     projectId: null,
+    //     isDone: false,
+    //     isFocusedOn: false
+    //   }
+    // ],
+    // shouldShowForm: null
   };
 
   render() {
@@ -108,18 +108,18 @@ export class InboxList extends React.Component {
         <NavLink to="/inbox/add">Add user</NavLink>
         {/*<button onClick={() => this.addTasks()}>New task</button>*/}
         <ul>
-          {this.state.inboxTasks.map(task => (
-            <li key={task.id}>
-              <input id={task.id} type="checkbox" />
+          {tasks.map(task => (
+            <li key={task._id}>
+              <input id={task._id} type="checkbox" />
               {task.title}
               <br />
               {task.description}
               <br />
-              Task id: {task.id}
+              Task id: {task._id}
               <br />
               Create: {task.createdOn}
               <br />
-              <button onClick={() => onRemoveTask(task.id)}>Delete</button>
+              <button onClick={() => onRemoveTask(task._id)}>Delete</button>
             </li>
           ))}
         </ul>
